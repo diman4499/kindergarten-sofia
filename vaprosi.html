@@ -31,15 +31,24 @@
     .hero-photo{display:block;width:100%;height:auto}.hero{background:var(--cream);min-height:0;padding:40px 0}.hero:before{display:none}.hero-grid>div:first-child{max-width:760px;padding:0;background:none;box-shadow:none;backdrop-filter:none}.hero h1{font-size:clamp(36px,5vw,60px)}
     @media(max-width:1080px){.navin .links{order:3;flex-basis:100%}}@media(max-width:700px){.links{font-size:13px;gap:10px 15px}.brand{font-size:17px}.hero{padding:28px 0}.page-content>.section{padding-top:28px}}
 
+  
+    /* Keep the announcement bar and navigation together while scrolling. */
+    html,body{overflow-x:clip}
+    html{scroll-padding-top:calc(var(--site-header-height,180px) + 16px)}
+    .site-header{position:sticky;top:0;z-index:50;background:var(--cream);box-shadow:0 3px 16px rgba(32,59,53,.08)}
+    .site-header .nav{position:static;top:auto}
   </style>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=3">
   <script src="assets/visit-form-config.js" defer></script>
   <script src="assets/visit-modal.js?v=1" defer></script>
   <script src="assets/visit-form.js" defer></script>
+  <script src="assets/site-header.js" defer></script>
 </head>
 <body>
+<div class="site-header">
 <div class="top"><div class="wrap"><span>Записването за новата учебна година е отворено</span><a href="mailto:starkids@abv.bg" data-visit-open aria-haspopup="dialog" aria-controls="visit-dialog">Запишете посещение →</a></div></div>
 <header class="nav"><div class="wrap navin"><a class="brand" href="index.html"><span class="mark"><img src="assets/star-kids-logo.svg?v=3" alt="" width="39" height="39" style="display:block;width:100%;height:100%"></span>Star Kids</a><nav class="links" aria-label="Основна навигация"><a href="index.html">Начало</a><a href="index.html#about">За яслата</a><a href="ekip.html">Екип</a><a href="grizha.html">Грижа</a><a href="programa.html">Програма</a><a href="roditeli.html">За родители</a><a href="vaprosi.html" aria-current="page">Въпроси</a><a href="kontakti.html">Контакти</a></nav><a class="btn" href="mailto:starkids@abv.bg" data-visit-open aria-haspopup="dialog" aria-controls="visit-dialog">Посещение</a></div></header>
+</div>
 <main class="page-content"><div class="wrap page-intro"><a class="page-back" href="index.html">← Обратно към началото</a><h1>Въпроси</h1></div>
 <section class="section" id="faq"><div class="wrap"><div class="eyebrow">Въпроси</div><h2>Често задавани въпроси</h2><div class="faq"><details><summary>От каква възраст приемате деца?</summary><p>Тук ще посочим реалния възрастов диапазон и наличните групи.</p></details><details><summary>Как протича адаптацията?</summary><p>Постепенно: кратки посещения, запознаване с педагога и преминаване към целодневен режим.</p></details><details><summary>Какво включва месечната такса?</summary><p>Ще опишем режима, храненето, заниманията, разходките и допълнителните услуги.</p></details><details><summary>Може ли да дойдем на посещение?</summary><p>Да. Изберете удобно време чрез формата за контакт.</p></details></div></div></section>
 </main>
