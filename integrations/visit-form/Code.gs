@@ -1,5 +1,5 @@
 // Deploy as an Apps Script web app. Secrets belong in Script Properties only.
-const VISIT_AGES = ['Под 1 година', '1–2 години', '2–3 години', 'Над 3 години'];
+const VISIT_AGES = ['10 месеца', '11 месеца', '1 година', '1–2 години', '2–3 години'];
 const VISIT_LOCATIONS = ['Овча купел — Монтевидео 4'];
 const VISIT_HEADERS = ['ID', 'Получено на', 'Име на родител', 'Телефон', 'Възраст', 'Локация', 'Предпочитано време', 'Бележки', 'Съгласие', 'Статус', 'Telegram'];
 
@@ -19,7 +19,7 @@ function validateVisit_(data) {
   const phone = field('phone', 25, true);
   const digits = phone.replace(/\D/g, '');
   const childAge = field('childAge', 40, true);
-  const location = field('location', 100, true);
+  const location = field('location', 100, false) || VISIT_LOCATIONS[0];
   if (parentName.length < 2 || !/^[+0-9() .-]+$/.test(phone) || digits.length < 7 || digits.length > 15) throw new Error('Invalid contact');
   if (!VISIT_AGES.includes(childAge) || !VISIT_LOCATIONS.includes(location) || data.consent !== 'yes') throw new Error('Invalid selection');
   return {requestId, parentName, phone, childAge, location, preferredTime: field('preferredTime', 150, false), notes: field('notes', 1500, false)};

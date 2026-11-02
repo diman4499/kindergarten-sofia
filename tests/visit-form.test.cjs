@@ -61,3 +61,15 @@ test('different request from same phone is throttled', () => {
   assert.equal(s.submit({...valid(), requestId:'22345678-1234-4123-8123-123456789abc'}).ok, false);
   assert.equal(s.rows.length, 2);
 });
+
+
+test('new age choices accept a request without a location selector and persist the sole base', () => {
+  for (const childAge of ['10 месеца', '11 месеца', '1 година', '1–2 години', '2–3 години']) {
+    const s = server();
+    const data = {...valid(), childAge};
+    delete data.location;
+    assert.equal(s.submit(data).ok, true);
+    assert.equal(s.rows[1][4], "'" + childAge);
+    assert.equal(s.rows[1][5], "'Овча купел — Монтевидео 4");
+  }
+});

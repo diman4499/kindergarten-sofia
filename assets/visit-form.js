@@ -52,7 +52,19 @@
       if (result.ok !== true || result.requestId !== requestId) throw new Error('Unconfirmed');
       form.reset();
       requestId = '';
-      show('Благодарим! Заявката Ви е получена. Ще се свържем с Вас за потвърждение на посещението.', 'success');
+      show('Благодарим Ви, че избрахте Star Kids! Пожелаваме Ви прекрасен ден!', 'success');
+      const success = document.querySelector('#visit-success');
+      if (success) {
+        form.hidden = true;
+        document.querySelector('#visit-heading').hidden = true;
+        document.querySelector('#visit-description').hidden = true;
+        success.hidden = false;
+        const dialog = form.closest('dialog');
+        dialog.setAttribute('aria-labelledby', 'visit-success-heading');
+        dialog.setAttribute('aria-describedby', 'visit-success-copy');
+        dialog.scrollTop = 0;
+        success.focus();
+      }
     } catch {
       show('Не успяхме да потвърдим получаването. Опитайте отново или се свържете с нас по телефона. Попълнените данни са запазени във формата.', 'error');
     } finally {
