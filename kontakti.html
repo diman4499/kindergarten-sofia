@@ -31,9 +31,37 @@
     .hero-photo{display:block;width:100%;height:auto}.hero{background:var(--cream);min-height:0;padding:40px 0}.hero:before{display:none}.hero-grid>div:first-child{max-width:760px;padding:0;background:none;box-shadow:none;backdrop-filter:none}.hero h1{font-size:clamp(36px,5vw,60px)}
     @media(max-width:1080px){.navin .links{order:3;flex-basis:100%}}@media(max-width:700px){.links{font-size:13px;gap:10px 15px}.brand{font-size:17px}.hero{padding:28px 0}.page-content>.section{padding-top:28px}}
 
+
+    /* Visit booking form */
+.visit-section{padding:48px 0 68px;scroll-margin-top:180px}
+.visit-layout{display:grid;grid-template-columns:minmax(0,760px) 1fr;gap:32px;align-items:start}
+.visit-card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:32px;box-shadow:var(--shadow)}
+.visit-card h2{font-size:24px;letter-spacing:-.025em;margin:0 0 6px;line-height:1.3}
+.visit-lead{color:var(--muted);margin:0 0 28px;font-size:14px}
+.visit-fields{display:grid;grid-template-columns:1fr 1fr;gap:22px 16px}
+.visit-field{display:flex;flex-direction:column;gap:5px;font-size:14px;min-width:0}
+.visit-wide{grid-column:1/-1}
+.visit-field input,.visit-field select,.visit-field textarea{font:inherit;color:var(--ink);width:100%;border:1px solid #e4dfda;border-radius:11px;background:#faf8f6;padding:11px 12px;min-height:44px}
+.visit-field textarea{resize:vertical;min-height:100px}
+.visit-field input:focus,.visit-field select:focus,.visit-field textarea:focus{outline:3px solid var(--mint);border-color:var(--green)}
+.visit-consent{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--muted);margin:22px 0}
+.visit-consent input{margin-top:4px;flex-shrink:0;accent-color:var(--green)}
+.visit-submit{border-radius:12px;font-size:16px;padding:12px 28px}
+.visit-submit:disabled{opacity:.55;cursor:not-allowed}
+.visit-status{font-size:14px;margin:16px 0 0;white-space:pre-line}
+.visit-status[data-state="error"]{color:#a52c22}
+.visit-status[data-state="success"]{color:var(--green);font-weight:700}
+.visit-help{color:var(--muted);font-size:14px;margin:16px 0 0}
+.visit-help a,.visit-aside a{text-decoration:underline;text-underline-offset:3px}
+.visit-aside{padding:24px;background:var(--mint);border-radius:20px}
+.visit-aside h3{margin:0 0 12px;font-size:19px}
+.visit-aside p{margin:12px 0}
+.visit-trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+@media(max-width:900px){.visit-layout{grid-template-columns:1fr}.visit-aside{max-width:760px}}
+@media(max-width:540px){.visit-card{padding:24px 18px}.visit-fields{grid-template-columns:1fr;gap:18px}.visit-submit{width:100%}.visit-section{padding-top:30px}}
+
   </style>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=3">
-  <link rel="stylesheet" href="assets/visit-form.css">
   <script src="assets/visit-form-config.js" defer></script>
   <script src="assets/visit-form.js" defer></script>
 </head>
