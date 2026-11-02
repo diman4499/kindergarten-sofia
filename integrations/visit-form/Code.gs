@@ -1,7 +1,7 @@
 // Deploy as an Apps Script web app. Secrets belong in Script Properties only.
 const VISIT_AGES = ['10 месеца', '11 месеца', '1 година', '1–2 години', '2–3 години'];
 const VISIT_LOCATIONS = ['Овча купел — Монтевидео 4'];
-const VISIT_HEADERS = ['ID', 'Получено на', 'Име на родител', 'Телефон', 'Възраст', 'Локация', 'Предпочитано време', 'Бележки', 'Съгласие', 'Статус', 'Telegram'];
+const VISIT_HEADERS = ['ID', 'Получено на', 'Име на родител', 'Телефон', 'Възраст', 'Локация', 'Предпочитано време', 'Бележки', 'Съгласие', 'Статус', 'Telegram', 'Име на детето'];
 
 function validateVisit_(data) {
   if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('Invalid request');
@@ -18,11 +18,12 @@ function validateVisit_(data) {
   const parentName = field('parentName', 100, true);
   const phone = field('phone', 25, true);
   const digits = phone.replace(/\D/g, '');
+  const childName = field('childName', 100, false);
   const childAge = field('childAge', 40, true);
   const location = field('location', 100, false) || VISIT_LOCATIONS[0];
   if (parentName.length < 2 || !/^[+0-9() .-]+$/.test(phone) || digits.length < 7 || digits.length > 15) throw new Error('Invalid contact');
   if (!VISIT_AGES.includes(childAge) || !VISIT_LOCATIONS.includes(location) || data.consent !== 'yes') throw new Error('Invalid selection');
-  return {requestId, parentName, phone, childAge, location, preferredTime: field('preferredTime', 150, false), notes: field('notes', 1500, false)};
+  return {requestId, parentName, phone, childName, childAge, location, preferredTime: field('preferredTime', 150, false), notes: field('notes', 1500, false)};
 }
 
 function sheetText_(value) {
@@ -57,7 +58,7 @@ function doPost(e) {
     sheet.appendRow([
       visit.requestId, new Date(), sheetText_(visit.parentName), sheetText_(visit.phone),
       sheetText_(visit.childAge), sheetText_(visit.location), sheetText_(visit.preferredTime),
-      sheetText_(visit.notes), 'yes', 'Нова', 'Не е настроен'
+      sheetText_(visit.notes), 'yes', 'Нова', 'Не е настроен', sheetText_(visit.childName)
     ]);
     SpreadsheetApp.flush();
     cache.put(phoneKey, '1', 60);
@@ -69,6 +70,7 @@ function doPost(e) {
       if (token && chatId) {
         const message = ['⭐ Нова заявка за посещение — Star Kids',
           'Родител: ' + visit.parentName, 'Телефон: ' + visit.phone,
+          'Дете: ' + (visit.childName || 'Не е посочено'),
           'Възраст: ' + visit.childAge, 'Локация: ' + visit.location,
           'Време: ' + (visit.preferredTime || 'Не е посочено'),
           'Бележки: ' + (visit.notes || 'Няма'), 'ID: ' + visit.requestId].join('\n');

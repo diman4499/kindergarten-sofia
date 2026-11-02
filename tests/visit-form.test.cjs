@@ -73,3 +73,11 @@ test('new age choices accept a request without a location selector and persist t
     assert.equal(s.rows[1][5], "'Овча купел — Монтевидео 4");
   }
 });
+
+test('child name is preserved as literal text and older requests without it still work', () => {
+  const s = server();
+  assert.equal(s.submit({...valid(), childName:'=Тест Дете'}).ok, true);
+  assert.equal(s.rows[1][11], "'=Тест Дете");
+  assert.equal(server().submit(valid()).ok, true);
+  assert.equal(server().submit({...valid(), childName:'x'.repeat(101)}).ok, false);
+});
