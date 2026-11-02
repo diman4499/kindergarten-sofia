@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - /bin/mkdir -p /home3/starkid2/public_html/assets
+    - /bin/cp -R assets/. /home3/starkid2/public_html/assets/
+    - /bin/cp index.html ekip.html grizha.html kontakti.html programa.html roditeli.html vaprosi.html /home3/starkid2/public_html/
